@@ -3,7 +3,6 @@
 	{ "text": "うぽつ", "type": "fan" },
 	{ "text": "待ってた", "type": "fan" },
 	{ "text": "今日も配信ありがとう", "type": "fan" },
-	{ "text": "編集うますぎる", "type": "fan" },
 	{ "text": "この企画すき", "type": "fan" },
 	{ "text": "チャンネル登録した", "type": "fan" },
 	{ "text": "神回きたー", "type": "fan" },
@@ -25,10 +24,8 @@
 	{ "text": "そこ負けるとこじゃないw", "type": "tease" },
 	{ "text": "ポンコツで草", "type": "tease" },
 	{ "text": "サムネ詐欺やんけ", "type": "tease" },
-	{ "text": "editor仕事しろ", "type": "tease" },
 
 	{ "text": "つまらん", "type": "anti" },
-	{ "text": "編集手抜きすぎ", "type": "anti" },
 	{ "text": "見る価値なかった", "type": "anti" },
 	{ "text": "登録解除した", "type": "anti" },
 	{ "text": "声が不快", "type": "anti" },

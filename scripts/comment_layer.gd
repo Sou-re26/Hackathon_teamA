@@ -6,6 +6,8 @@ extends Control
 
 signal comment_spawned(comment: FlowingComment)
 signal comment_exited(comment: FlowingComment)
+## プレイヤーがコメントをクリックして消した時に発火。ジャンル判定・スコア加算はここに繋ぐ。
+signal comment_clicked(comment: FlowingComment)
 
 const TYPE_COLORS := {
 	&"neutral": Color(1.0, 1.0, 1.0),
@@ -22,6 +24,10 @@ const PENDING_LIMIT := 12
 ## コメント1件あたりの生成間隔(秒)。
 @export_range(0.05, 3.0, 0.05) var spawn_interval: float = 0.55
 @export_range(12, 96, 1) var font_size: int = 34
+## 上端の除外高さ(px)。UIバーなどコメントを重ねたくない領域の分だけ確保する。
+@export_range(0, 200, 1) var top_margin: int = 0
+## 下端の除外高さ(px)。
+@export_range(0, 200, 1) var bottom_margin: int = 0
 ## 種別ごとに色を変える(開発時の確認用)。本番は本家同様すべて白。
 @export var colorize_by_type: bool = false
 ## false にすると生成が止まる(流れているコメントはそのまま流れ切る)。
@@ -60,7 +66,8 @@ func push_comment(text: String, type: StringName = &"neutral") -> void:
 
 func _rebuild_lanes() -> void:
 	_lane_height = maxf(1.0, font_size * 1.35)
-	_lanes.resize(maxi(1, int(size.y / _lane_height)))
+	var usable_height := maxf(0.0, size.y - top_margin - bottom_margin)
+	_lanes.resize(maxi(1, int(usable_height / _lane_height)))
 
 
 func _enqueue_random() -> void:
@@ -104,8 +111,9 @@ func _try_spawn(data: Dictionary) -> bool:
 	comment.speed = speed
 	comment.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
 	comment.size = Vector2(width, _lane_height)
-	comment.position = Vector2(size.x, lane * _lane_height)
+	comment.position = Vector2(size.x, top_margin + lane * _lane_height)
 	comment.exited.connect(_on_comment_exited)
+	comment.clicked.connect(_on_comment_clicked)
 	add_child(comment)
 
 	_lanes[lane] = comment
@@ -137,6 +145,10 @@ func _pick_free_lane(width: float, speed: float) -> int:
 
 func _on_comment_exited(comment: FlowingComment) -> void:
 	comment_exited.emit(comment)
+
+
+func _on_comment_clicked(comment: FlowingComment) -> void:
+	comment_clicked.emit(comment)
 
 
 func _get_label_settings(type: StringName) -> LabelSettings:
