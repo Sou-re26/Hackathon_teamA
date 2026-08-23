@@ -2,6 +2,7 @@
 
 [ext_resource type="Theme" uid="uid://bhqbrei3lo5u3" path="res://theme/ui_theme.tres" id="1_theme"]
 [ext_resource type="Script" uid="uid://v1wovwk4k5j8" path="res://scripts/title_screen.gd" id="2_script"]
+[ext_resource type="Texture2D" uid="uid://d1yyeyekb15qn" path="res://assets/title.png" id="3_p6dhs"]
 
 [node name="TitleScreen" type="Control" unique_id=1477008901]
 layout_mode = 3
@@ -13,7 +14,7 @@ grow_vertical = 2
 theme = ExtResource("1_theme")
 script = ExtResource("2_script")
 
-[node name="Background" type="ColorRect" parent="." unique_id=469831003]
+[node name="Background" type="TextureRect" parent="." unique_id=1105665784]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -21,16 +22,18 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
-color = Color(0.07, 0.08, 0.1, 1)
+texture = ExtResource("3_p6dhs")
+expand_mode = 1
+stretch_mode = 6
 
 [node name="TitleGroup" type="CenterContainer" parent="." unique_id=1487773944]
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -200.0
+offset_left = -531.0
 offset_top = 60.0
-offset_right = 200.0
+offset_right = -101.0
 offset_bottom = 200.0
 grow_horizontal = 2
 mouse_filter = 2
@@ -61,10 +64,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -160.0
-offset_top = -80.0
-offset_right = 160.0
-offset_bottom = 80.0
+offset_left = 305.0
+offset_top = 173.0
+offset_right = 625.0
+offset_bottom = 333.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
